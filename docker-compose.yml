@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  dms-backend:
+    build: .
+    container_name: dms-backend
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_ENV: development
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_DEFAULT_REGION: us-east-1
+      S3_BUCKET: dms-bucket
+      AWS_ENDPOINT_URL: http://localstack:4566
+      DB_HOST: postgres
+      DB_NAME: dms
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    depends_on:
+      - postgres
+      - localstack
+    volumes:
+      - .:/app
+
+  postgres:
+    image: postgres:14
+    container_name: dms-db
+    environment:
+      POSTGRES_DB: dms
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  localstack:
+    image: localstack/localstack:3
+    container_name: dms-localstack
+    environment:
+      SERVICES: s3,kms
+      DEBUG: 1
+      DATA_DIR: /tmp/localstack/data
+    ports:
+      - "4566:4566"  # edge port
+    volumes:
+      - "./.localstack:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+volumes:
+  pgdata:

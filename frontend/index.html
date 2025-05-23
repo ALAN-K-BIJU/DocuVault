@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DMS Upload</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Document Management System</h1>
+  <form id="uploadForm">
+    <input type="text" name="username" placeholder="Your Name" required><br>
+    <input type="text" name="comment" placeholder="Comment"><br>
+    <input type="file" name="file" id="fileInput" required><br>
+    <button type="submit">Upload Document</button>
+  </form>
+
+  <hr>
+  <h2>Check Document Versions</h2>
+  <input type="text" id="versionFile" placeholder="Enter filename">
+  <button onclick="fetchVersions()">Get Versions</button>
+  <ul id="versionList"></ul>
+
+  <script src="upload.js"></script>
+  <script src="versions.js"></script>
+</body>
+</html>

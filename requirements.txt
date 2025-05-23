@@ -1,0 +1,13 @@
+Flask==2.3.3
+werkzeug==3.0.1
+python-dotenv==1.0.1
+Flask-Login==0.6.3
+Flask-CORS==4.0.0
+gunicorn==21.2.0
+fastapi
+uvicorn
+boto3
+psycopg2-binary
+sqlalchemy
+python-multipart
+python-dotenv
